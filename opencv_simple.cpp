@@ -24,7 +24,14 @@ int main(int argc, char **argv) {
 
     // Gauss-Seidel
     Mat mColorGaussSeidel(img.size(), img.type());
-    GaussSeidel_Seq(img, mColorGaussSeidel);
+    for (int i = 0; i < NOISE_ITER; ++i) {
+        GaussSeidel_Seq(img, mColorGaussSeidel);
+        if (i < (NOISE_ITER - 1)) {
+            uint8_t *tmp = img.data;
+            img.data = mColorGaussSeidel.data;
+            mColorGaussSeidel.data = tmp;
+        }
+    }
 
     // Gauss classique
     Mat mColorNoise(img.size(), img.type());
@@ -60,9 +67,9 @@ int main(int argc, char **argv) {
     fprintf(stdout, "Writting the output image of size %dx%d...\n", img.rows,
             img.cols);
 
-    imwrite("res/grey_res.jpg", img);
-    imwrite("res/noised_res.jpg", mColorNoise);
-    imwrite("res/gauss_seidel.jpg", mColorGaussSeidel);
+    imwrite("res/grey_res.png", img);
+    imwrite("res/noised_res.png", mColorNoise);
+    imwrite("res/gauss_seidel.png", mColorGaussSeidel);
 
     return 0;
 }
