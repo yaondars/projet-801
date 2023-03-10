@@ -21,10 +21,11 @@ inline uchar ToGrey(Vec3b const &c) {
     return r * 0.299 + g * 0.587 + b * 0.114;
 }
 
-inline void Blur(Mat const &mSrc, Vec3b &Des_Pixel, int Row, int Col) {
+inline void Blur(Mat const &mSrc, Mat const &mDst, Vec3b &Des_Pixel, int Row,
+                 int Col) {
     // Memorisation
-    Vec3b const &w = SampleAt(mSrc, Row - 1, Col); // West
-    Vec3b const &n = SampleAt(mSrc, Row, Col - 1); // North
+    Vec3b const &w = SampleAt(mDst, Row - 1, Col); // West
+    Vec3b const &n = SampleAt(mDst, Row, Col - 1); // North
     Vec3b const &c = SampleAt(mSrc, Row, Col);     // Center
     Vec3b const &e = SampleAt(mSrc, Row + 1, Col); // East
     Vec3b const &s = SampleAt(mSrc, Row, Col + 1); // South
@@ -74,7 +75,7 @@ bool GaussSeidel_Seq(const Mat mSrc, Mat &mDst) {
             // Des_Pixel.val[1] = 0;
             // Des_Pixel.val[2] = 0;
 
-            Blur(mSrc, Des_Pixel, Row, Col);
+            Blur(mSrc, mDst, Des_Pixel, Row, Col);
         }
     }
 
@@ -89,7 +90,7 @@ bool GaussSeidel_Seq(const Mat mSrc, Mat &mDst) {
             // Des_Pixel.val[1] = 255;
             // Des_Pixel.val[2] = 0;
 
-            Blur(mSrc, Des_Pixel, Row, Col);
+            Blur(mSrc, mDst, Des_Pixel, Row, Col);
         }
     }
 
@@ -106,7 +107,7 @@ bool GaussSeidel_Seq(const Mat mSrc, Mat &mDst) {
             // Des_Pixel.val[1] = 0;
             // Des_Pixel.val[2] = 255;
 
-            Blur(mSrc, Des_Pixel, Row, Col);
+            Blur(mSrc, mDst, Des_Pixel, Row, Col);
         }
     }
 

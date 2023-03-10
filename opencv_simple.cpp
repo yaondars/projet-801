@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 
     // Gauss-Seidel
     Mat mColorGaussSeidel(img.size(), img.type());
+    img.copyTo(mColorGaussSeidel);
     for (int i = 0; i < NOISE_ITER; ++i) {
         GaussSeidel_Seq(img, mColorGaussSeidel);
         if (i < (NOISE_ITER - 1)) {
