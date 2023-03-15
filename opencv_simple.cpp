@@ -1,5 +1,5 @@
 #include <iostream>
-#include <opencv4/opencv2/imgcodecs.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 #include "gauss_seidel.h"
 #include "gaussianNoise.h"

@@ -1,7 +1,7 @@
 #include "gauss_seidel.h"
 
-#include <opencv4/opencv2/core/hal/interface.h>
-#include <opencv4/opencv2/core/matx.hpp>
+#include <opencv2/core/hal/interface.h>
+#include <opencv2/core/matx.hpp>
 
 inline uchar Clamp(int n) {
     n = n > 255 ? 255 : n;
